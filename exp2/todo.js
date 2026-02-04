@@ -35,10 +35,10 @@ async function addtodo(req,res) {
     let list = await readfile();
     let demostr = {
         todo: val,
-        status: "❌"
+        status: " -- Pending"
     }
     list.push(demostr);
-    fs.writeFile(FILE,JSON.stringify(list,null,2),(err)=>{ /// null,2 is used for formatizing purpose (adding item , replacer(null) , spacing(2))
+    fs.writeFile(FILE,JSON.stringify(list,null,2),(err)=>{ 
         if(err){
             console.log(err);
             res.json({message:"error occured"});
@@ -53,10 +53,10 @@ async function addtodo(req,res) {
 async function deltodo(req,res) {
     let val = req.body.todo;
     let list = await readfile();
-    let index = list.findIndex((item)=> item.todo === val); //cant use indexOf here becz its used fr primitives like number,string for complexes like obj use findIndex which always takes func as arg
+    let index = list.findIndex((item)=> item.todo === val);
     if(index!=-1)
     list.splice(index,1);
-    fs.writeFile(FILE,JSON.stringify(list,null,2),(err)=>{ /// null,2 is used for formatizing purpose (adding item , replacer(null) , spacing(2))
+    fs.writeFile(FILE,JSON.stringify(list,null,2),(err)=>{
         if(err)
             console.log(err);
         else
@@ -79,7 +79,7 @@ async function marktodo(req,res) {
         res.json({ message: "todo not found" });
         return;
     }
-    list[index].status="✔️";
+    list[index].status=" -- Completed";
     fs.writeFile(FILE,JSON.stringify(list,null,2),(err)=>{
         if(err){
             console.log(err);
