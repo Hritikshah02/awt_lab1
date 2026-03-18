@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Emitter Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; background: #f9fafb; color: #222; }
+    h1 { margin-bottom: 8px; }
+    .panel { background: #fff; padding: 16px; border: 1px solid #e5e7eb; border-radius: 8px; max-width: 480px; }
+    .row { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+    input { padding: 8px; border: 1px solid #d1d5db; border-radius: 6px; flex: 1; min-width: 120px; }
+    button { padding: 8px 12px; border: none; border-radius: 6px; background: #2563eb; color: #fff; cursor: pointer; }
+    button:hover { background: #1d4ed8; }
+    ul { margin-top: 16px; padding-left: 20px; max-height: 260px; overflow-y: auto; }
+    li { margin-bottom: 6px; font-family: "SFMono-Regular", Consolas, monospace; }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h1>Event Emitter UI</h1>
+    <div class="row">
+      <input id="user" type="text" placeholder="Username (default: Guest)" />
+      <input id="item" type="text" placeholder="Item for purchase" />
+    </div>
+    <div class="row">
+      <button id="loginBtn">Login</button>
+      <button id="logoutBtn">Logout</button>
+      <button id="purchaseBtn">Purchase</button>
+      <button id="updateBtn">Update Profile</button>
+      <button id="summaryBtn">Summary</button>
+    </div>
+    <strong>Log:</strong>
+    <ul id="log"></ul>
+  </div>
+
+  <script>
+    const logList = document.getElementById('log');
+    const userInput = document.getElementById('user');
+    const itemInput = document.getElementById('item');
+
+    const eventCounts = { login: 0, logout: 0, purchase: 0, updateProfile: 0 };
+
+    function log(message) {
+      const li = document.createElement('li');
+      const stamp = new Date().toLocaleTimeString();
+      li.textContent = `[${stamp}] ${message}`;
+      logList.appendChild(li);
+      logList.scrollTop = logList.scrollHeight;
+    }
+
+    function username() {
+      return userInput.value.trim() || 'Guest';
+    }
+
+    function emitLogin() {
+      eventCounts.login++;
+      log(`${username()} logged in`);
+    }
+
+    function emitLogout() {
+      eventCounts.logout++;
+      log(`${username()} logged out`);
+    }
+
+    function emitPurchase() {
+      const item = itemInput.value.trim() || 'Item';
+      eventCounts.purchase++;
+      log(`${username()} purchased ${item}`);
+    }
+
+    function emitUpdateProfile() {
+      eventCounts.updateProfile++;
+      log(`${username()} updated profile`);
+    }
+
+    function emitSummary() {
+      log('Event summary:');
+      Object.entries(eventCounts).forEach(([key, count]) => log(`- ${key}: ${count} times`));
+    }
+
+    document.getElementById('loginBtn').addEventListener('click', emitLogin);
+    document.getElementById('logoutBtn').addEventListener('click', emitLogout);
+    document.getElementById('purchaseBtn').addEventListener('click', emitPurchase);
+    document.getElementById('updateBtn').addEventListener('click', emitUpdateProfile);
+    document.getElementById('summaryBtn').addEventListener('click', emitSummary);
+  </script>
+</body>
+</html>
