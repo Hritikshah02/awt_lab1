@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hello Visitor Counter</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 60px 72px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .greeting {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #eaeaea;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 48px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .counter-box {
+      background: rgba(233, 69, 96, 0.1);
+      border: 2px solid rgba(233, 69, 96, 0.4);
+      border-radius: 16px;
+      padding: 28px 48px;
+      display: inline-block;
+      margin-bottom: 40px;
+    }
+
+    .counter-label {
+      font-size: 0.85rem;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .counter-value {
+      font-size: 4rem;
+      font-weight: 800;
+      color: #e94560;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .info {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .info span {
+      color: #0f9b6b;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 class="greeting">Hello, Visitor!</h1>
+    <p class="subtitle">Welcome to the Django Visitor Counter</p>
+
+    <div class="counter-box">
+      <div class="counter-label">Total Visits</div>
+      <div class="counter-value">{{ count }}</div>
+    </div>
+
+    <p class="info">Refresh the page to <span>increase the count</span></p>
+  </div>
+</body>
+</html>
